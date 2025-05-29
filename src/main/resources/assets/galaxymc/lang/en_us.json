@@ -2,5 +2,13 @@
   "item.galaxymc.raw_tin": "Raw Tin",
   "item.galaxymc.raw_titanium": "Raw Titanium",
   "item.galaxymc.tin_ingot": "Tin Ingot",
-  "item.galaxymc.titanium_ingot": "Titanium Ingot"
+  "item.galaxymc.titanium_ingot": "Titanium Ingot",
+  "block.galaxymc.raw_tin_block": "Raw Tin Block",
+  "block.galaxymc.raw_titanium_block": "Raw Titanium Block",
+  "block.galaxymc.tin_block": "Tin Block",
+  "block.galaxymc.titanium_block": "Titanium Block",
+  "block.galaxymc.tin_ore": "Tin Ore",
+  "block.galaxymc.tin_deepslate_ore": "Tin Deepslate Ore",
+  "block.galaxymc.titanium_ore": "Titanium Ore",
+  "block.galaxymc.titanium_deepslate_ore": "Titanium Deepslate Ore"
 }

@@ -1,5 +1,8 @@
 package net.floinker.galaxymc.datagen;
 
+import net.floinker.galaxymc.block.GalaxyMcBlocks;
+import net.floinker.galaxymc.item.GalaxyMcItems;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -14,7 +17,6 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.List;
 import java.util.Set;
 
 public class GalaxyMcBlockLootTableProvider extends BlockLootSubProvider {
@@ -24,7 +26,19 @@ public class GalaxyMcBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        dropSelf(GalaxyMcBlocks.RAW_TIN_BLOCK.get());
+        dropSelf(GalaxyMcBlocks.RAW_TITANIUM_BLOCK.get());
+        dropSelf(GalaxyMcBlocks.TIN_BLOCK.get());
+        dropSelf(GalaxyMcBlocks.TITANIUM_BLOCK.get());
 
+        add(GalaxyMcBlocks.TIN_ORE.get(),
+                block -> createOreDrop(GalaxyMcBlocks.TIN_ORE.get(), GalaxyMcItems.RAW_TIN.get()));
+        add(GalaxyMcBlocks.TIN_DEEPSLATE_ORE.get(),
+                block -> createOreDrop(GalaxyMcBlocks.TIN_DEEPSLATE_ORE.get(), GalaxyMcItems.RAW_TIN.get()));
+        add(GalaxyMcBlocks.TITANIUM_ORE.get(),
+                block -> createOreDrop(GalaxyMcBlocks.TITANIUM_ORE.get(), GalaxyMcItems.RAW_TITANIUM.get()));
+        add(GalaxyMcBlocks.TITANIUM_DEEPSLATE_ORE.get(),
+                block -> createOreDrop(GalaxyMcBlocks.TITANIUM_DEEPSLATE_ORE.get(), GalaxyMcItems.RAW_TITANIUM.get()));
     }
 
     private LootTable.Builder createMultipleOreDrops(Block pBlock, Item pItem, float minDrops, float maxDrops) {
@@ -42,7 +56,6 @@ public class GalaxyMcBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-//        return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
-        return List.of(); // Replace with actual blocks when implemented
+        return GalaxyMcBlocks.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
     }
 }

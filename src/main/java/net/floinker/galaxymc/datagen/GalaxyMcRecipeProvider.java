@@ -2,6 +2,7 @@ package net.floinker.galaxymc.datagen;
 
 
 import net.floinker.galaxymc.GalaxyMcMod;
+import net.floinker.galaxymc.block.GalaxyMcBlocks;
 import net.floinker.galaxymc.item.GalaxyMcItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -24,39 +25,20 @@ public class GalaxyMcRecipeProvider extends RecipeProvider implements ICondition
     @Override
     protected void buildRecipes(RecipeOutput pRecipeOutput) {
         final List<ItemLike> TIN_SMELTING_INPUTS = List.of(
-                GalaxyMcItems.RAW_TIN.get()
-//                ModBlocks.TIN_ORE.get(),
-//                ModBlocks.TIN_DEEPSLATE_ORE.get()
+                GalaxyMcItems.RAW_TIN,
+                GalaxyMcBlocks.TIN_ORE,
+                GalaxyMcBlocks.TIN_DEEPSLATE_ORE
         );
         final List<ItemLike> TITANIUM_SMELTING_INPUTS = List.of(
-                GalaxyMcItems.RAW_TITANIUM.get()
-//                ModBlocks.TITANIUM_ORE.get(),
-//                ModBlocks.TITANIUM_DEEPSLATE_ORE.get()
+                GalaxyMcItems.RAW_TITANIUM,
+                GalaxyMcBlocks.TITANIUM_ORE,
+                GalaxyMcBlocks.TITANIUM_DEEPSLATE_ORE
         );
 
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RAW_TIN_BLOCK.get())
-//                .define('A', ModItems.RAW_TIN.get())
-//                .pattern("AAA")
-//                .pattern("AAA")
-//                .pattern("AAA")
-//                .unlockedBy(getHasName(ModItems.RAW_TIN.get()), has(ModItems.RAW_TIN.get()))
-//                .save(pRecipeOutput);
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RAW_TITANIUM_BLOCK.get())
-//                .define('A', ModItems.RAW_TITANIUM.get())
-//                .pattern("AAA")
-//                .pattern("AAA")
-//                .pattern("AAA")
-//                .unlockedBy(getHasName(ModItems.RAW_TITANIUM.get()), has(ModItems.RAW_TITANIUM.get()))
-//                .save(pRecipeOutput);
-//
-//        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.RAW_TIN.get(), 9)
-//                .requires(ModBlocks.RAW_TIN_BLOCK.get())
-//                .unlockedBy(getHasName(ModBlocks.RAW_TIN_BLOCK.get()), has(ModBlocks.RAW_TIN_BLOCK.get()))
-//                .save(pRecipeOutput);
-//        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.RAW_TITANIUM.get(), 9)
-//                .requires(ModBlocks.RAW_TITANIUM_BLOCK.get())
-//                .unlockedBy(getHasName(ModBlocks.RAW_TITANIUM_BLOCK.get()), has(ModBlocks.RAW_TITANIUM_BLOCK.get()))
-//                .save(pRecipeOutput);
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, GalaxyMcItems.RAW_TIN, RecipeCategory.BUILDING_BLOCKS, GalaxyMcBlocks.RAW_TIN_BLOCK);
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, GalaxyMcItems.RAW_TITANIUM, RecipeCategory.BUILDING_BLOCKS, GalaxyMcBlocks.RAW_TITANIUM_BLOCK);
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, GalaxyMcItems.TIN_INGOT, RecipeCategory.BUILDING_BLOCKS, GalaxyMcBlocks.TIN_BLOCK);
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, GalaxyMcItems.TITANIUM_INGOT, RecipeCategory.BUILDING_BLOCKS, GalaxyMcBlocks.TITANIUM_BLOCK);
 
         oreSmelting(pRecipeOutput, TIN_SMELTING_INPUTS, RecipeCategory.MISC, GalaxyMcItems.TIN_INGOT.get(), 0.25f, 200, "tin_ingot");
         oreSmelting(pRecipeOutput, TITANIUM_SMELTING_INPUTS, RecipeCategory.MISC, GalaxyMcItems.TITANIUM_INGOT.get(), 0.25f, 200, "titanium_ingot");
@@ -65,35 +47,23 @@ public class GalaxyMcRecipeProvider extends RecipeProvider implements ICondition
         oreBlasting(pRecipeOutput, TITANIUM_SMELTING_INPUTS, RecipeCategory.MISC, GalaxyMcItems.TITANIUM_INGOT.get(), 0.25f, 100, "titanium_ingot");
     }
 
-    protected static void oreSmelting(
-            RecipeOutput pRecipeOutput, List<ItemLike> pItemLikes, RecipeCategory pRecipeCategory, ItemLike pItemLike, float pExperience, int pCookingTime, String pGroup
-    ) {
-        oreCooking(pRecipeOutput, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new, pItemLikes, pRecipeCategory, pItemLike, pExperience, pCookingTime, pGroup, "_from_smelting");
+    protected static void oreSmelting(RecipeOutput recipeOutput, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,
+                                      float pExperience, int pCookingTIme, String pGroup) {
+        oreCooking(recipeOutput, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new, pIngredients, pCategory, pResult,
+                pExperience, pCookingTIme, pGroup, "_from_smelting");
     }
 
-    protected static void oreBlasting(
-            RecipeOutput pRecipeOutput, List<ItemLike> pItemLikes, RecipeCategory pRecipeCategory, ItemLike pItemLike, float pExperience, int pCookingTime, String pGroup
-    ) {
-        oreCooking(pRecipeOutput, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new, pItemLikes, pRecipeCategory, pItemLike, pExperience, pCookingTime, pGroup, "_from_blasting");
+    protected static void oreBlasting(RecipeOutput recipeOutput, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,
+                                      float pExperience, int pCookingTime, String pGroup) {
+        oreCooking(recipeOutput, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new, pIngredients, pCategory, pResult,
+                pExperience, pCookingTime, pGroup, "_from_blasting");
     }
 
-    protected static <T extends AbstractCookingRecipe> void oreCooking(
-            RecipeOutput pRecipeOutput,
-            RecipeSerializer<T> pRecipeSerializer,
-            AbstractCookingRecipe.Factory<T> pCookingFactory,
-            List<ItemLike> pItemLikes,
-            RecipeCategory pRecipeCategory,
-            ItemLike pItemLike,
-            float pExperience,
-            int pCookingTime,
-            String pGroup,
-            String pRecipeName
-    ) {
-        for (ItemLike itemlike : pItemLikes) {
-            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), pRecipeCategory, pItemLike, pExperience, pCookingTime, pRecipeSerializer, pCookingFactory)
-                    .group(pGroup)
-                    .unlockedBy(getHasName(itemlike), has(itemlike))
-                    .save(pRecipeOutput, GalaxyMcMod.MOD_ID + ":" + getItemName(pItemLike) + pRecipeName + "_" + getItemName(itemlike));
+    protected static <T extends AbstractCookingRecipe> void oreCooking(RecipeOutput recipeOutput, RecipeSerializer<T> pCookingSerializer, AbstractCookingRecipe.Factory<T> factory,
+                                                                       List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup, String pRecipeName) {
+        for (ItemLike itemlike : pIngredients) {
+            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime, pCookingSerializer, factory).group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike))
+                    .save(recipeOutput, GalaxyMcMod.MOD_ID + ":" + getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
         }
     }
 }

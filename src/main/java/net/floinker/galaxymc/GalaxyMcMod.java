@@ -1,6 +1,7 @@
 package net.floinker.galaxymc;
 
 import com.mojang.logging.LogUtils;
+import net.floinker.galaxymc.block.GalaxyMcBlocks;
 import net.floinker.galaxymc.item.GalaxyMcItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
@@ -36,6 +37,7 @@ public class GalaxyMcMod {
 
         // Register the item registry
         GalaxyMcItems.register(modEventBus);
+        GalaxyMcBlocks.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -55,6 +57,16 @@ public class GalaxyMcMod {
             event.accept(GalaxyMcItems.RAW_TITANIUM);
             event.accept(GalaxyMcItems.TIN_INGOT);
             event.accept(GalaxyMcItems.TITANIUM_INGOT);
+        }
+        if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
+            event.accept(GalaxyMcBlocks.RAW_TIN_BLOCK);
+            event.accept(GalaxyMcBlocks.RAW_TITANIUM_BLOCK);
+            event.accept(GalaxyMcBlocks.TIN_BLOCK);
+            event.accept(GalaxyMcBlocks.TITANIUM_BLOCK);
+            event.accept(GalaxyMcBlocks.TIN_ORE);
+            event.accept(GalaxyMcBlocks.TIN_DEEPSLATE_ORE);
+            event.accept(GalaxyMcBlocks.TITANIUM_ORE);
+            event.accept(GalaxyMcBlocks.TITANIUM_DEEPSLATE_ORE);
         }
     }
 

@@ -1,6 +1,7 @@
 package net.floinker.galaxymc.datagen;
 
 import net.floinker.galaxymc.GalaxyMcMod;
+import net.floinker.galaxymc.block.GalaxyMcBlocks;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -14,32 +15,14 @@ public class GalaxyMcBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-//        blockWithItem(ModBlocks.RAW_TIN_BLOCK);
-//        blockWithItem(ModBlocks.RAW_TITANIUM_BLOCK);
-//        blockWithItem(ModBlocks.TIN_ORE);
-//        blockWithItem(ModBlocks.TIN_DEEPSLATE_ORE);
-//        blockWithItem(ModBlocks.TITANIUM_ORE);
-//        blockWithItem(ModBlocks.TITANIUM_DEEPSLATE_ORE);
-//        blockWithItem(ModBlocks.MAGIC_BLOCK);
-//
-//        stairsBlock(ModBlocks.RAW_TIN_STAIRS.get(), blockTexture(ModBlocks.RAW_TIN_BLOCK.get()));
-//        slabBlock(ModBlocks.RAW_TIN_SLAB.get(), blockTexture(ModBlocks.RAW_TIN_BLOCK.get()), blockTexture(ModBlocks.RAW_TIN_BLOCK.get()));
-//
-//        buttonBlock(ModBlocks.RAW_TIN_BUTTON.get(), blockTexture(ModBlocks.RAW_TIN_BLOCK.get()));
-//        pressurePlateBlock(ModBlocks.RAW_TIN_PRESSURE_PLATE.get(), blockTexture(ModBlocks.RAW_TIN_BLOCK.get()));
-//        fenceBlock(ModBlocks.RAW_TIN_FENCE.get(), blockTexture(ModBlocks.RAW_TIN_BLOCK.get()));
-//        fenceGateBlock(ModBlocks.RAW_TIN_FENCE_GATE.get(), blockTexture(ModBlocks.RAW_TIN_BLOCK.get()));
-//        wallBlock(ModBlocks.RAW_TIN_WALL.get(), blockTexture(ModBlocks.RAW_TIN_BLOCK.get()));
-//        doorBlockWithRenderType(ModBlocks.RAW_TIN_DOOR.get(), modLoc("block/raw_tin_door_bottom"), modLoc("block/raw_tin_door_top"), "cutout");
-//        trapdoorBlockWithRenderType(ModBlocks.RAW_TIN_TRAPDOOR.get(), modLoc("block/raw_tin_trapdoor"), true, "cutout");
-//
-//        blockItem(ModBlocks.RAW_TIN_STAIRS);
-//        blockItem(ModBlocks.RAW_TIN_SLAB);
-//        blockItem(ModBlocks.RAW_TIN_PRESSURE_PLATE);
-//        blockItem(ModBlocks.RAW_TIN_FENCE_GATE);
-//        blockItem(ModBlocks.RAW_TIN_TRAPDOOR, "_bottom");
-//
-//        customLamp();
+        blockWithItem(GalaxyMcBlocks.RAW_TIN_BLOCK);
+        blockWithItem(GalaxyMcBlocks.RAW_TITANIUM_BLOCK);
+        blockWithItem(GalaxyMcBlocks.TIN_ORE);
+        blockWithItem(GalaxyMcBlocks.TIN_DEEPSLATE_ORE);
+        blockWithItem(GalaxyMcBlocks.TITANIUM_ORE);
+        blockWithItem(GalaxyMcBlocks.TITANIUM_DEEPSLATE_ORE);
+        blockWithItem(GalaxyMcBlocks.TIN_BLOCK);
+        blockWithItem(GalaxyMcBlocks.TITANIUM_BLOCK);
     }
 
     private void blockWithItem(DeferredBlock<?> deferredBlock) {
