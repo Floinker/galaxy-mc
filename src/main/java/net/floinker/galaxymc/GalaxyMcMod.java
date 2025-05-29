@@ -2,8 +2,11 @@ package net.floinker.galaxymc;
 
 import com.mojang.logging.LogUtils;
 import net.floinker.galaxymc.block.GalaxyMcBlocks;
+import net.floinker.galaxymc.block.entity.GalaxyMcBlockEntities;
 import net.floinker.galaxymc.item.GalaxyMcCreativeModeTabs;
 import net.floinker.galaxymc.item.GalaxyMcItems;
+import net.floinker.galaxymc.screen.GalaxyMcMenuTypes;
+import net.floinker.galaxymc.screen.custom.IngotPressScreen;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -13,6 +16,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -37,9 +41,12 @@ public class GalaxyMcMod {
 
         GalaxyMcCreativeModeTabs.register(modEventBus);
 
-        // Register the item registry
         GalaxyMcItems.register(modEventBus);
         GalaxyMcBlocks.register(modEventBus);
+
+        GalaxyMcBlockEntities.register(modEventBus);
+
+        GalaxyMcMenuTypes.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -69,6 +76,11 @@ public class GalaxyMcMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
+        }
+
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(GalaxyMcMenuTypes.INGOT_PRESS_MENU.get(), IngotPressScreen::new);
         }
     }
 }

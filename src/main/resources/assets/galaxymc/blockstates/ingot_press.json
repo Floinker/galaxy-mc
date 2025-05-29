@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+        "model": "galaxymc:block/ingot_press"
+    }
+  }
+}

@@ -40,6 +40,7 @@ public class GalaxyMcCreativeModeTabs {
                         output.accept(GalaxyMcBlocks.TIN_DEEPSLATE_ORE.get());
                         output.accept(GalaxyMcBlocks.TITANIUM_ORE.get());
                         output.accept(GalaxyMcBlocks.TITANIUM_DEEPSLATE_ORE.get());
+                        output.accept(GalaxyMcBlocks.INGOT_PRESS.get());
                     })
                     .withTabsBefore(ResourceLocation.fromNamespaceAndPath(GalaxyMcMod.MOD_ID, "galaxy_mc_items_tab"))
                     .build()

@@ -30,6 +30,7 @@ public class GalaxyMcBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(GalaxyMcBlocks.RAW_TITANIUM_BLOCK.get());
         dropSelf(GalaxyMcBlocks.TIN_BLOCK.get());
         dropSelf(GalaxyMcBlocks.TITANIUM_BLOCK.get());
+        dropSelf(GalaxyMcBlocks.INGOT_PRESS.get());
 
         add(GalaxyMcBlocks.TIN_ORE.get(),
                 block -> createOreDrop(GalaxyMcBlocks.TIN_ORE.get(), GalaxyMcItems.RAW_TIN.get()));

@@ -1,6 +1,7 @@
 package net.floinker.galaxymc.block;
 
 import net.floinker.galaxymc.GalaxyMcMod;
+import net.floinker.galaxymc.block.custom.IngotPressBlock;
 import net.floinker.galaxymc.item.GalaxyMcItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -35,6 +36,9 @@ public class GalaxyMcBlocks {
             () -> new DropExperienceBlock(UniformInt.of(2, 4), Block.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
     public static final DeferredBlock<Block> TITANIUM_DEEPSLATE_ORE = registerBlock("titanium_deepslate_ore",
             () -> new DropExperienceBlock(UniformInt.of(2, 4), Block.Properties.of().strength(5f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)));
+
+    public static final DeferredBlock<Block> INGOT_PRESS = registerBlock("ingot_press",
+            () -> new IngotPressBlock(Block.Properties.of().strength(3f).sound(SoundType.METAL).noOcclusion()));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
