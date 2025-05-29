@@ -2,8 +2,8 @@ package net.floinker.galaxymc;
 
 import com.mojang.logging.LogUtils;
 import net.floinker.galaxymc.block.GalaxyMcBlocks;
+import net.floinker.galaxymc.item.GalaxyMcCreativeModeTabs;
 import net.floinker.galaxymc.item.GalaxyMcItems;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -35,6 +35,8 @@ public class GalaxyMcMod {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
+        GalaxyMcCreativeModeTabs.register(modEventBus);
+
         // Register the item registry
         GalaxyMcItems.register(modEventBus);
         GalaxyMcBlocks.register(modEventBus);
@@ -52,22 +54,7 @@ public class GalaxyMcMod {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(GalaxyMcItems.RAW_TIN);
-            event.accept(GalaxyMcItems.RAW_TITANIUM);
-            event.accept(GalaxyMcItems.TIN_INGOT);
-            event.accept(GalaxyMcItems.TITANIUM_INGOT);
-        }
-        if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
-            event.accept(GalaxyMcBlocks.RAW_TIN_BLOCK);
-            event.accept(GalaxyMcBlocks.RAW_TITANIUM_BLOCK);
-            event.accept(GalaxyMcBlocks.TIN_BLOCK);
-            event.accept(GalaxyMcBlocks.TITANIUM_BLOCK);
-            event.accept(GalaxyMcBlocks.TIN_ORE);
-            event.accept(GalaxyMcBlocks.TIN_DEEPSLATE_ORE);
-            event.accept(GalaxyMcBlocks.TITANIUM_ORE);
-            event.accept(GalaxyMcBlocks.TITANIUM_DEEPSLATE_ORE);
-        }
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
