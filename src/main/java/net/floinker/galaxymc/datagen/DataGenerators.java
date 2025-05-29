@@ -37,5 +37,7 @@ public class DataGenerators {
 
         dataGenerator.addProvider(event.includeClient(), new GalaxyMcItemModelProvider(packOutput, existingFileHelper));
         dataGenerator.addProvider(event.includeClient(), new GalaxyMcBlockStateProvider(packOutput, existingFileHelper));
+
+        dataGenerator.addProvider(event.includeServer(), new GalaxyMcDatapackProvider(packOutput, lookupProvider));
     }
 }
