@@ -1,5 +1,6 @@
 {
-  "itemGroup.examplemod": "Example Mod Tab",
-  "block.examplemod.example_block": "Example Block",
-  "item.examplemod.example_item": "Example Item"
+  "item.galaxymc.raw_tin": "Raw Tin",
+  "item.galaxymc.raw_titanium": "Raw Titanium",
+  "item.galaxymc.tin_ingot": "Tin Ingot",
+  "item.galaxymc.titanium_ingot": "Titanium Ingot"
 }

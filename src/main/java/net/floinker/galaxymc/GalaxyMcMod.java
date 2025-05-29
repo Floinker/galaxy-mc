@@ -1,6 +1,8 @@
 package net.floinker.galaxymc;
 
 import com.mojang.logging.LogUtils;
+import net.floinker.galaxymc.item.GalaxyMcItems;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -32,6 +34,9 @@ public class GalaxyMcMod {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
+        // Register the item registry
+        GalaxyMcItems.register(modEventBus);
+
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
@@ -45,7 +50,12 @@ public class GalaxyMcMod {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(GalaxyMcItems.RAW_TIN);
+            event.accept(GalaxyMcItems.RAW_TITANIUM);
+            event.accept(GalaxyMcItems.TIN_INGOT);
+            event.accept(GalaxyMcItems.TITANIUM_INGOT);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
